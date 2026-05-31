@@ -14,7 +14,7 @@ app.add_middleware(
 )
 
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "").strip()
-OPENROUTER_MODEL = os.environ.get("OPENROUTER_MODEL", "deepseek/deepseek-v4-flash-free").strip()
+OPENROUTER_MODEL = os.environ.get("OPENROUTER_MODEL", "deepseek/deepseek-chat:free").strip()
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 SYSTEM_PROMPT = """You are TrueNorth Coach, a warm, empathetic wellness coach for an app called TrueNorth. Your users are people on a weight loss and wellness journey — primarily plus-size men and women who want shame-free support.
@@ -58,7 +58,6 @@ async def chat(req: ChatRequest):
     if not OPENROUTER_API_KEY:
         raise HTTPException(status_code=500, detail="OpenRouter API key not configured on server")
 
-    # Inject user name into system prompt
     system = SYSTEM_PROMPT.replace("the user", req.user_name)
 
     async with httpx.AsyncClient(timeout=30) as client:
@@ -82,7 +81,6 @@ async def chat(req: ChatRequest):
                 },
             )
             data = resp.json()
-            # Safely extract the reply
             choices = data.get("choices", [])
             if not choices:
                 error_msg = data.get("error", {}).get("message", str(data))
