@@ -13,7 +13,11 @@ class AICoachService {
   
   // Use Render server as primary, OpenRouter as fallback
   static const String _renderUrl = 'https://truenorth-app-fqfa.onrender.com/chat';
+  static const String _renderHealthUrl = 'https://truenorth-app-fqfa.onrender.com/health';
   static const String _openrouterUrl = 'https://openrouter.ai/api/v1/chat/completions';
+
+  // How long to wait for Render cold start (free tier can take 30-50s)
+  static const Duration _renderTimeout = Duration(seconds: 60);
 
   // Conversation memory for multi-turn context
   final List<Map<String, dynamic>> _history = [];
@@ -37,6 +41,12 @@ class AICoachService {
 
   void setUserName(String name) {
     _userName = name.isNotEmpty ? name : 'there';
+  }
+
+  /// Pre-warm the Render server so the user doesn't wait for a cold start.
+  /// Fire-and-forget — doesn't block anything if it fails.
+  void wakeUp() {
+    http.get(Uri.parse(_renderHealthUrl)).timeout(_renderTimeout).then((_) {}).catchError((_) {});
   }
 
   String get apiKey => _apiKey;
@@ -103,7 +113,7 @@ Tone: Warm, supportive, like a kind friend who believes in you completely. Use c
           'user_name': _userName,
           'history': _history,
         }),
-      ).timeout(const Duration(seconds: 15));
+      ).timeout(_renderTimeout);
       
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);

@@ -43,3 +43,6 @@ venv/
 
 # Windows
 *.log
+
+# Graphify knowledge graph (AST cache — regenerated on demand)
+/graphify-out/

@@ -29,6 +29,10 @@ class _AICoachScreenState extends State<AICoachScreen> {
         ? widget.userName
         : 'there';
     _coach.setUserName(name);
+
+    // Start warming the Render server (fire-and-forget)
+    _coach.wakeUp();
+
     final greeting = name == 'there'
         ? 'Hi there! 👋 I\'m your TrueNorth coach. What\'s on your mind today?'
         : 'Hi $name! 👋 Great to see you. How are you feeling today?';
@@ -282,21 +286,32 @@ class _AICoachScreenState extends State<AICoachScreen> {
           color: Colors.white.withValues(alpha: 0.08),
           borderRadius: BorderRadius.circular(20).copyWith(bottomLeft: Radius.zero),
         ),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            ...List.generate(3, (i) => TweenAnimationBuilder<double>(
-              tween: Tween(begin: 0.3, end: 1.0),
-              duration: Duration(milliseconds: 600 + i * 200),
-              builder: (_, v, __) => Container(
-                margin: const EdgeInsets.only(right: 4),
-                width: 8, height: 8,
-                decoration: BoxDecoration(
-                  color: AppTheme.primaryPurple.withValues(alpha: v),
-                  shape: BoxShape.circle,
-                ),
-              ),
-            )),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ...List.generate(3, (i) => TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 0.3, end: 1.0),
+                  duration: Duration(milliseconds: 600 + i * 200),
+                  builder: (_, v, __) => Container(
+                    margin: const EdgeInsets.only(right: 4),
+                    width: 8, height: 8,
+                    decoration: BoxDecoration(
+                      color: AppTheme.primaryPurple.withValues(alpha: v),
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                )),
+              ],
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Connecting to your AI Coach…',
+              style: TextStyle(fontSize: 11, color: AppTheme.textMuted),
+            ),
           ],
         ),
       ),
