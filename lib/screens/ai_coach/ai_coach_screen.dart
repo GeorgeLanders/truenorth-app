@@ -106,11 +106,11 @@ class _AICoachScreenState extends State<AICoachScreen> {
                   child: const Icon(Icons.smart_toy_rounded, color: Colors.white, size: 22),
                 ),
                 const SizedBox(width: 12),
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('AI Coach', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
-                    Text(_coach.displayModelName, style: TextStyle(fontSize: 12, color: AppTheme.textMuted)),
+                    const Text('AI Coach', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+                    Text(_coach.displayModelName, style: const TextStyle(fontSize: 12, color: AppTheme.textMuted)),
                   ],
                 ),
                 const Spacer(),
