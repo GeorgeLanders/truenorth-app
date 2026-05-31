@@ -66,8 +66,14 @@ class _AICoachScreenState extends State<AICoachScreen> {
     _controller.clear();
     _scrollToBottom();
 
+    // Track user message in history
+    _coach.addToHistory(text.trim(), true);
+
     // Get response from AI coach
     final response = await _coach.getResponse(text.trim());
+
+    // Track coach response in history
+    _coach.addToHistory(response, false);
 
     setState(() {
       _messages.add(_ChatMessage(response, false));
@@ -104,7 +110,7 @@ class _AICoachScreenState extends State<AICoachScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('AI Coach', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
-                    Text('DeepSeek V4', style: TextStyle(fontSize: 12, color: AppTheme.textMuted)),
+                    Text(_coach.displayModelName, style: TextStyle(fontSize: 12, color: AppTheme.textMuted)),
                   ],
                 ),
                 const Spacer(),
@@ -304,9 +310,9 @@ class _AICoachScreenState extends State<AICoachScreen> {
         backgroundColor: const Color(0xFF1A1A3E),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Text('Set Up AI Coach', style: TextStyle(color: AppTheme.textPrimary)),
-        content: const Text(
-          'To use DeepSeek V4 via OpenRouter, add your API key in Profile & Settings.\n\n'
-          'Until then, I\'ll use my built-in responses!',
+        content: Text(
+          'Your AI Coach runs on your Render server, already connected and ready to go.\n\n'
+          'For direct OpenRouter access, add your API key in Profile & Settings.',
           style: TextStyle(color: AppTheme.textSecondary),
         ),
         actions: [

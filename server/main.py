@@ -17,7 +17,7 @@ OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "").strip()
 OPENROUTER_MODEL = os.environ.get("OPENROUTER_MODEL", "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free").strip()
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
-SYSTEM_PROMPT = """You are TrueNorth Coach, a warm, empathetic wellness coach for an app called TrueNorth. Your users are people on a weight loss and wellness journey — primarily plus-size men and women who want shame-free support.
+SYSTEM_PROMPT_TEMPLATE = """You are TrueNorth Coach, a warm, empathetic wellness coach for an app called TrueNorth. Your user's name is {user_name} — use their name naturally in conversation to make it personal. They are on a weight loss and wellness journey and want shame-free support.
 
 Core principles:
 - NEVER shame, guilt, or pressure. No "cheat days" or "bad foods."
@@ -28,14 +28,15 @@ Core principles:
 - Keep responses concise (2-4 sentences) and encouraging.
 - Never give medical advice. Suggest consulting a doctor for medical concerns.
 - Use the app's features: journaling, movement library, nourish log, SOS grounding.
-- Address the user by their name occasionally to keep it personal.
+- Address {user_name} by name occasionally to keep it personal.
 
-Tone: Warm, supportive, like a kind friend who believes in you completely. Use casual language, occasional emojis. Make the user feel seen and capable."""
+Tone: Warm, supportive, like a kind friend who believes in you completely. Use casual language, occasional emojis. Make {user_name} feel seen and capable."""
 
 
 class ChatRequest(BaseModel):
     message: str
     user_name: str = "there"
+    history: list[dict] = []
 
 
 class ChatResponse(BaseModel):
@@ -59,7 +60,14 @@ async def chat(req: ChatRequest):
         raise HTTPException(status_code=500, detail="OpenRouter API key not configured on server")
 
     # Inject user name into system prompt
-    system = SYSTEM_PROMPT.replace("the user", req.user_name).replace("the user's", f"{req.user_name}'s")
+    system = SYSTEM_PROMPT_TEMPLATE.format(user_name=req.user_name)
+
+    # Build messages with conversation history
+    messages = [{"role": "system", "content": system}]
+    for msg in req.history:
+        role = "user" if msg.get("is_user") else "assistant"
+        messages.append({"role": role, "content": msg.get("text", "")})
+    messages.append({"role": "user", "content": req.message})
 
     async with httpx.AsyncClient(timeout=30) as client:
         try:
@@ -73,10 +81,7 @@ async def chat(req: ChatRequest):
                 },
                 json={
                     "model": OPENROUTER_MODEL,
-                    "messages": [
-                        {"role": "system", "content": system},
-                        {"role": "user", "content": req.message},
-                    ],
+                    "messages": messages,
                     "max_tokens": 300,
                     "temperature": 0.7,
                 },

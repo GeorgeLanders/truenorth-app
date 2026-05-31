@@ -15,6 +15,21 @@ class AICoachService {
   static const String _renderUrl = 'https://truenorth-app-fqfa.onrender.com/chat';
   static const String _openrouterUrl = 'https://openrouter.ai/api/v1/chat/completions';
 
+  // Conversation memory for multi-turn context
+  final List<Map<String, dynamic>> _history = [];
+
+  void clearHistory() {
+    _history.clear();
+  }
+
+  void addToHistory(String text, bool isUser) {
+    _history.add({'text': text, 'is_user': isUser});
+    // Keep last 20 messages to stay within token limits
+    if (_history.length > 20) {
+      _history.removeAt(0);
+    }
+  }
+
   void configure(String apiKey, String model) {
     _apiKey = apiKey;
     _model = model;
@@ -26,11 +41,12 @@ class AICoachService {
 
   String get apiKey => _apiKey;
   String get model => _model;
+  String get displayModelName => _model.split('/').last.split('-').first;
   bool get isConfigured => _apiKey.isNotEmpty;
 
-  // System prompt for the AI coach
-  String _getSystemPrompt() {
-    return '''You are TrueNorth Coach, a warm, empathetic wellness coach for an app called TrueNorth. Your user's name is $_userName — use their name naturally in conversation to make it personal.
+  // Build system prompt with user's name
+  String _buildSystemPrompt() {
+    return '''You are TrueNorth Coach, a warm, empathetic wellness coach for an app called TrueNorth. Your user's name is $_userName — use their name naturally in conversation to make it personal. They are on a weight loss and wellness journey and want shame-free support.
 
 Core principles:
 - NEVER shame, guilt, or pressure. No "cheat days" or "bad foods."
@@ -41,7 +57,7 @@ Core principles:
 - Keep responses concise (2-4 sentences) and encouraging.
 - Never give medical advice. Suggest consulting a doctor for medical concerns.
 - Use the app's features: journaling, movement library, nourish log, SOS grounding.
-- Address the user by their name ($_userName) occasionally to keep it personal.
+- Address $_userName by name occasionally to keep it personal.
 
 Tone: Warm, supportive, like a kind friend who believes in you completely. Use casual language, occasional emojis. Make $_userName feel seen and capable.''';
   }
@@ -85,6 +101,7 @@ Tone: Warm, supportive, like a kind friend who believes in you completely. Use c
         body: jsonEncode({
           'message': userMessage,
           'user_name': _userName,
+          'history': _history,
         }),
       ).timeout(const Duration(seconds: 15));
       
@@ -101,6 +118,19 @@ Tone: Warm, supportive, like a kind friend who believes in you completely. Use c
     // Fallback: OpenRouter direct (if API key is set on phone)
     if (_apiKey.isNotEmpty) {
       try {
+        final system = _buildSystemPrompt();
+        final messages = <Map<String, String>>[
+          {'role': 'system', 'content': system},
+        ];
+        // Add history
+        for (final msg in _history) {
+          messages.add({
+            'role': msg['is_user'] == true ? 'user' : 'assistant',
+            'content': msg['text'] as String,
+          });
+        }
+        messages.add({'role': 'user', 'content': userMessage});
+
         final response = await http.post(
           Uri.parse(_openrouterUrl),
           headers: {
@@ -111,10 +141,7 @@ Tone: Warm, supportive, like a kind friend who believes in you completely. Use c
           },
           body: jsonEncode({
             'model': _model,
-            'messages': [
-              {'role': 'system', 'content': _getSystemPrompt()},
-              {'role': 'user', 'content': userMessage},
-            ],
+            'messages': messages,
             'max_tokens': 300,
             'temperature': 0.7,
           }),
