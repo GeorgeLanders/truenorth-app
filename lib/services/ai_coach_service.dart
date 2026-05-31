@@ -8,11 +8,12 @@ class AICoachService {
   AICoachService._();
 
   String _apiKey = '';
-  String _model = 'deepseek/deepseek-v4-flash-free';
+  String _model = 'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free';
   String _userName = 'there';
   
-  // OpenRouter endpoint
-  static const String _baseUrl = 'https://openrouter.ai/api/v1/chat/completions';
+  // Use Render server as primary, OpenRouter as fallback
+  static const String _renderUrl = 'https://truenorth-app-fqfa.onrender.com/chat';
+  static const String _openrouterUrl = 'https://openrouter.ai/api/v1/chat/completions';
 
   void configure(String apiKey, String model) {
     _apiKey = apiKey;
@@ -76,40 +77,60 @@ Tone: Warm, supportive, like a kind friend who believes in you completely. Use c
   }
 
   Future<String> getResponse(String userMessage) async {
-    // If no API key, use local fallback responses
-    if (_apiKey.isEmpty) {
-      return _getLocalResponse(userMessage);
-    }
-
+    // Try Render server first (it has the API key and knows the user's name)
     try {
       final response = await http.post(
-        Uri.parse(_baseUrl),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $_apiKey',
-          'HTTP-Referer': 'truenorth-app://',
-          'X-Title': 'TrueNorth Wellness',
-        },
+        Uri.parse(_renderUrl),
+        headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
-          'model': _model,
-          'messages': [
-            {'role': 'system', 'content': _getSystemPrompt()},
-            {'role': 'user', 'content': userMessage},
-          ],
-          'max_tokens': 300,
-          'temperature': 0.7,
+          'message': userMessage,
+          'user_name': _userName,
         }),
-      );
-
+      ).timeout(const Duration(seconds: 15));
+      
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        return data['choices'][0]['message']['content'] as String;
-      } else {
-        return 'Hmm, I had trouble connecting. Let me try a different approach: ${_getLocalResponse(userMessage)}';
+        if (data['reply'] != null) {
+          return data['reply'] as String;
+        }
       }
     } catch (e) {
-      return _getLocalResponse(userMessage);
+      // Render server unavailable, fall through to OpenRouter or local
     }
+
+    // Fallback: OpenRouter direct (if API key is set on phone)
+    if (_apiKey.isNotEmpty) {
+      try {
+        final response = await http.post(
+          Uri.parse(_openrouterUrl),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $_apiKey',
+            'HTTP-Referer': 'truenorth-app://',
+            'X-Title': 'TrueNorth Wellness',
+          },
+          body: jsonEncode({
+            'model': _model,
+            'messages': [
+              {'role': 'system', 'content': _getSystemPrompt()},
+              {'role': 'user', 'content': userMessage},
+            ],
+            'max_tokens': 300,
+            'temperature': 0.7,
+          }),
+        ).timeout(const Duration(seconds: 15));
+
+        if (response.statusCode == 200) {
+          final data = jsonDecode(response.body);
+          return data['choices'][0]['message']['content'] as String;
+        }
+      } catch (e) {
+        // OpenRouter also failed, fall through to local
+      }
+    }
+
+    // Final fallback: local responses
+    return _getLocalResponse(userMessage);
   }
 
   String _getLocalResponse(String message) {

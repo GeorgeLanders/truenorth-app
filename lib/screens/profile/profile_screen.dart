@@ -25,11 +25,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _loadData();
     _nameCtrl = TextEditingController();
     _apiKeyCtrl = TextEditingController();
-    _modelCtrl = TextEditingController(text: 'deepseek/deepseek-v4-flash-free');
+    _modelCtrl = TextEditingController(text: 'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free');
     _affirmationCtrl = TextEditingController();
+    _loadData();
   }
 
   @override
