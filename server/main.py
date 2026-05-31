@@ -14,7 +14,7 @@ app.add_middleware(
 )
 
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "").strip()
-OPENROUTER_MODEL = os.environ.get("OPENROUTER_MODEL", "deepseek/deepseek-chat:free").strip()
+OPENROUTER_MODEL = os.environ.get("OPENROUTER_MODEL", "nvidia/nemotron-3-super:free").strip()
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 SYSTEM_PROMPT = """You are TrueNorth Coach, a warm, empathetic wellness coach for an app called TrueNorth. Your users are people on a weight loss and wellness journey — primarily plus-size men and women who want shame-free support.
@@ -58,7 +58,8 @@ async def chat(req: ChatRequest):
     if not OPENROUTER_API_KEY:
         raise HTTPException(status_code=500, detail="OpenRouter API key not configured on server")
 
-    system = SYSTEM_PROMPT.replace("the user", req.user_name)
+    # Inject user name into system prompt
+    system = SYSTEM_PROMPT.replace("the user", req.user_name).replace("the user's", f"{req.user_name}'s")
 
     async with httpx.AsyncClient(timeout=30) as client:
         try:
@@ -84,7 +85,7 @@ async def chat(req: ChatRequest):
             choices = data.get("choices", [])
             if not choices:
                 error_msg = data.get("error", {}).get("message", str(data))
-                raise HTTPException(status_code=502, detail=f"OpenRouter returned no choices: {error_msg}")
+                raise HTTPException(status_code=502, detail=f"OpenRouter error: {error_msg}")
             reply = choices[0]["message"]["content"]
             return ChatResponse(reply=reply, model=OPENROUTER_MODEL)
         except HTTPException:
