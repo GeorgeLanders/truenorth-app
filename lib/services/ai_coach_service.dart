@@ -183,4 +183,64 @@ Tone: Warm, supportive, like a kind friend who believes in you completely. Use c
     "Suggest a gentle movement",
     "I feel like I'm not making progress",
   ];
+
+  /// Get AI-generated meal suggestions for today
+  Future<Map<String, String>> getMealSuggestions() async {
+    try {
+      final response = await http.post(
+        Uri.parse(_renderUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'message': 'Give me a simple, realistic meal plan for today. '
+              'Include breakfast, lunch, dinner, and a snack. '
+              'Format exactly as:\n'
+              'BREAKFAST: ...\n'
+              'LUNCH: ...\n'
+              'DINNER: ...\n'
+              'SNACK: ...\n'
+              'Keep each to one short sentence. Focus on satisfying, real-food options.',
+          'user_name': _userName,
+          'history': [],
+        }),
+      ).timeout(_renderTimeout);
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data['reply'] != null) {
+          return _parseMealSuggestions(data['reply'] as String);
+        }
+      }
+    } catch (_) {}
+
+    // Fallback: use the AI coach with a simpler message
+    return {
+      'breakfast': 'Overnight oats with berries and a dollop of yogurt',
+      'lunch': 'Grilled chicken or tofu salad with avocado and lemon vinaigrette',
+      'dinner': 'Sheet-pan salmon or chickpeas with roasted vegetables and sweet potato',
+      'snack': 'Apple slices with almond butter or a handful of trail mix',
+    };
+  }
+
+  Map<String, String> _parseMealSuggestions(String text) {
+    final result = <String, String>{};
+    for (final line in text.split('\n')) {
+      final colonIdx = line.indexOf(':');
+      if (colonIdx < 0) continue;
+      final key = line.substring(0, colonIdx).trim().toLowerCase();
+      final value = line.substring(colonIdx + 1).trim();
+      if (value.isNotEmpty && ['breakfast', 'lunch', 'dinner', 'snack'].contains(key)) {
+        result[key] = value;
+      }
+    }
+    // Fall back to defaults if parsing failed
+    if (result.length < 4) {
+      return {
+        'breakfast': 'Overnight oats with berries and a dollop of yogurt',
+        'lunch': 'Grilled chicken or tofu salad with avocado and lemon vinaigrette',
+        'dinner': 'Sheet-pan salmon or chickpeas with roasted vegetables and sweet potato',
+        'snack': 'Apple slices with almond butter or a handful of trail mix',
+      };
+    }
+    return result;
+  }
 }

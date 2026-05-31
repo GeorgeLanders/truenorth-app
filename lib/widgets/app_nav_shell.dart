@@ -47,10 +47,10 @@ class _AppNavShellState extends State<AppNavShell> {
       body: _screens()[_currentIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFF0F0F2E).withValues(alpha: 0.9),
+          color: const Color(0xFF0F0B20).withValues(alpha: 0.95),
           border: Border(
             top: BorderSide(
-              color: Colors.white.withValues(alpha: 0.06),
+              color: AppTheme.roseGold.withValues(alpha: 0.08),
               width: 0.5,
             ),
           ),
@@ -66,10 +66,10 @@ class _AppNavShellState extends State<AppNavShell> {
           type: BottomNavigationBarType.fixed,
           elevation: 0,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.compass_calibration_rounded), label: 'Home'),
             BottomNavigationBarItem(icon: Icon(Icons.directions_run_rounded), label: 'Move'),
-            BottomNavigationBarItem(icon: Icon(Icons.restaurant_rounded), label: 'Nourish'),
-            BottomNavigationBarItem(icon: Icon(Icons.smart_toy_rounded), label: 'Coach'),
+            BottomNavigationBarItem(icon: Icon(Icons.local_dining_rounded), label: 'Nourish'),
+            BottomNavigationBarItem(icon: Icon(Icons.psychology_rounded), label: 'Coach'),
           ],
         ),
       ),

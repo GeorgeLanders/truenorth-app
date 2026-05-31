@@ -1,49 +1,58 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // ── TrueNorth V3: Super-Shiny Premium Palette ──
-  // Deeper, more dramatic background
-  static const Color deepSpace = Color(0xFF050515);
-  static const Color deepPurple = Color(0xFF120825);
-  static const Color darkNavy = Color(0xFF081525);
+  // ── TrueNorth V4: Warm Amethyst + Rose Gold ──
+  // Deeper, warmer background
+  static const Color deepSpace = Color(0xFF0A0615);
+  static const Color deepPurple = Color(0xFF160C2A);
+  static const Color darkNavy = Color(0xFF0F0A20);
 
-  // Primary - electric purple (more vibrant)
-  static const Color primaryPurple = Color(0xFF8B5CF6);
-  static const Color primaryLight = Color(0xFFB794FF);
+  // Primary - warm amethyst (richer, more feminine)
+  static const Color primaryPurple = Color(0xFF9B59B6);
+  static const Color primaryLight = Color(0xFFC39BD3);
 
-  // Secondary - hot coral/pink (more saturated)
-  static const Color warmCoral = Color(0xFFFF3366);
-  static const Color warmCoralLight = Color(0xFFFF5C8A);
+  // Rose gold - the new warm accent
+  static const Color roseGold = Color(0xFFE8A87C);
+  static const Color roseGoldLight = Color(0xFFF5D5C0);
 
-  // Accents - super vibrant
-  static const Color warmGold = Color(0xFFFFB800);  // punchier gold
-  static const Color cyanTeal = Color(0xFF00F5FF);   // bright neon cyan
-  static const Color vibrantGreen = Color(0xFF00F593); // bright neon green
+  // Secondary - warm coral/pink (softer than hot coral)
+  static const Color warmCoral = Color(0xFFE8625E);
+  static const Color warmCoralLight = Color(0xFFF4A7A7);
+  static const Color blushPink = Color(0xFFF4B8B8);
 
-  // Glass - stronger effect
-  static const Color glassWhite = Color(0x12FFFFFF);
+  // Accents
+  static const Color warmGold = Color(0xFFF0C27A);  // warmer gold
+  static const Color cyanTeal = Color(0xFF7EC8E3);   // softer teal-cyan
+  static const Color vibrantGreen = Color(0xFF6EE7B7); // softer mint-green
+
+  // Cream - warm white for text containers
+  static const Color creamWhite = Color(0xFFFFF8F0);
+
+  // Glass - warmer effect
+  static const Color glassWhite = Color(0x14FFFFFF);
   static const Color glassWhiteMed = Color(0x1EFFFFFF);
   static const Color glassWhiteHi = Color(0x2AFFFFFF);
+  static const Color glassRose = Color(0x1AF5D5C0); // rose-tinted glass
 
   // Text
-  static const Color textPrimary = Color(0xFFFFFFFF);
-  static const Color textSecondary = Color(0xCCFFFFFF);
-  static const Color textMuted = Color(0x88FFFFFF);
+  static const Color textPrimary = Color(0xFFFFF8F0); // warm white
+  static const Color textSecondary = Color(0xCCFFF8F0);
+  static const Color textMuted = Color(0x88FFF8F0);
 
-  // Gradient backgrounds - deeper contrast
+  // Gradient backgrounds - warmer contrast
   static const List<Color> bgGradient = [
-    Color(0xFF050515),
-    Color(0xFF120825),
-    Color(0xFF081525),
+    Color(0xFF0A0615),
+    Color(0xFF160C2A),
+    Color(0xFF0F0A20),
   ];
 
-  // 3D blob gradient colors - super saturated for maximum glow
+  // Blob colors - warmer, more saturated with rose gold
   static const List<Color> blobColors = [
-    Color(0xFF8B5CF6),  // electric purple
-    Color(0xFFFF3366),  // hot coral
-    Color(0xFFFFB800),  // bright gold
-    Color(0xFF00F5FF),  // neon cyan
-    Color(0xFF00F593),  // neon green
+    Color(0xFF9B59B6),  // warm amethyst
+    Color(0xFFE8A87C),  // rose gold
+    Color(0xFFE8625E),  // warm coral
+    Color(0xFFF4B8B8),  // blush pink
+    Color(0xFF7EC8E3),  // soft teal
   ];
 
   // ── Theme Data ──
@@ -81,8 +90,8 @@ class AppTheme {
         iconTheme: IconThemeData(color: textPrimary),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Color(0xFF0D0D25),
-        selectedItemColor: warmCoral,
+        backgroundColor: Color(0xFF0F0B20),
+        selectedItemColor: roseGold,
         unselectedItemColor: textMuted,
         type: BottomNavigationBarType.fixed,
         elevation: 20,

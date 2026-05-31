@@ -13,6 +13,7 @@ class GlassCard extends StatelessWidget {
   final Color? borderColor;
   final Color? glowColor;
   final bool shiny;
+  final Color? tint; // optional warm tint (e.g., AppTheme.roseGold or AppTheme.glassRose)
 
   const GlassCard({
     super.key,
@@ -26,11 +27,14 @@ class GlassCard extends StatelessWidget {
     this.borderColor,
     this.glowColor,
     this.shiny = true,
+    this.tint,
   });
 
   @override
   Widget build(BuildContext context) {
     final effectiveOpacity = opacity.clamp(0.0, 1.0);
+    final bgColor = tint?.withValues(alpha: effectiveOpacity) ?? Colors.white.withValues(alpha: effectiveOpacity);
+    final border = borderColor ?? tint?.withValues(alpha: 0.2) ?? Colors.white.withValues(alpha: 0.12);
     return Container(
       width: width,
       height: height,
@@ -55,10 +59,10 @@ class GlassCard extends StatelessWidget {
                 filter: ui.ImageFilter.blur(sigmaX: 12, sigmaY: 12),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: effectiveOpacity),
+                    color: bgColor,
                     borderRadius: BorderRadius.circular(radius),
                     border: Border.all(
-                      color: borderColor ?? Colors.white.withValues(alpha: 0.12),
+                      color: border,
                       width: 1,
                     ),
                   ),

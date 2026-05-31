@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/glass_card.dart';
 import '../../services/storage_service.dart';
+import '../../services/ai_coach_service.dart';
 import '../../models/journal_entry.dart';
 
 class NourishScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class NourishScreen extends StatefulWidget {
 
 class _NourishScreenState extends State<NourishScreen> {
   final _storage = StorageService();
+  final _coach = AICoachService();
   final _descController = TextEditingController();
   final _notesController = TextEditingController();
   String _selectedMealType = 'meal';
@@ -20,10 +22,15 @@ class _NourishScreenState extends State<NourishScreen> {
   List<MealLog> _logs = [];
   int _waterCups = 0;
 
+  // Meal suggestions
+  Map<String, String> _mealSuggestions = {};
+  bool _loadingMeals = false;
+
   @override
   void initState() {
     super.initState();
     _loadData();
+    _refreshMealIdeas();
   }
 
   void _loadData() {
@@ -34,12 +41,24 @@ class _NourishScreenState extends State<NourishScreen> {
     });
   }
 
-  void _saveMeal() async {
-    if (_descController.text.trim().isEmpty) return;
+  Future<void> _refreshMealIdeas() async {
+    setState(() => _loadingMeals = true);
+    final suggestions = await _coach.getMealSuggestions();
+    if (mounted) {
+      setState(() {
+        _mealSuggestions = suggestions;
+        _loadingMeals = false;
+      });
+    }
+  }
+
+  void _saveMeal([String? description]) async {
+    final desc = description ?? _descController.text.trim();
+    if (desc.isEmpty) return;
     final meal = MealLog(
       date: DateTime.now(),
       mealType: _selectedMealType,
-      description: _descController.text.trim(),
+      description: desc,
       satisfaction: _satisfaction,
       notes: _notesController.text.trim().isNotEmpty ? _notesController.text.trim() : null,
     );
@@ -57,8 +76,10 @@ class _NourishScreenState extends State<NourishScreen> {
     _loadData();
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: const Text('Nourishment logged! 🌿'),
-          backgroundColor: AppTheme.softMint, behavior: SnackBarBehavior.floating,
+        SnackBar(
+          content: const Text('Nourishment logged! 🌿'),
+          backgroundColor: AppTheme.vibrantGreen,
+          behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
       );
@@ -87,36 +108,97 @@ class _NourishScreenState extends State<NourishScreen> {
   Widget build(BuildContext context) {
     final today = DateFormat('EEEE, MMM d').format(DateTime.now());
     return Scaffold(
-      backgroundColor: AppTheme.deepNavy,
+      backgroundColor: AppTheme.deepSpace,
       appBar: AppBar(
-        title: const Text('Nourish', style: TextStyle(color: AppTheme.softSand)),
+        title: const Text('Nourish'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(today, style: TextStyle(fontSize: 14, color: AppTheme.softSand.withValues(alpha: 0.6))),
+            // Date + header
+            Text(today, style: TextStyle(fontSize: 14, color: AppTheme.textSecondary.withValues(alpha: 0.6))),
             const SizedBox(height: 4),
-            const Text('Mindful Nourishment', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppTheme.softSand)),
+            Row(
+              children: [
+                const Text('\u{1F34E} Mindful Nourishment',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppTheme.textPrimary)),
+                const Spacer(),
+                if (_loadingMeals)
+                  const SizedBox(
+                    width: 18, height: 18,
+                    child: CircularProgressIndicator(strokeWidth: 2, color: AppTheme.roseGold),
+                  ),
+              ],
+            ),
             const SizedBox(height: 8),
-            Text('No judgment, no diet rules — just noticing what you eat and how it makes you feel.',
-                style: TextStyle(fontSize: 13, color: AppTheme.softSand.withValues(alpha: 0.6))),
+            Text('No judgment, no diet rules \u2014 just noticing what you eat and how it makes you feel.',
+                style: TextStyle(fontSize: 13, color: AppTheme.textSecondary.withValues(alpha: 0.6))),
             const SizedBox(height: 20),
 
-            // Water tracker inline
+            // ── Today's Meal Ideas ──
+            Row(
+              children: [
+                const Text('\u{1F4AD} Ideas for Today',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+                const Spacer(),
+                GestureDetector(
+                  onTap: _refreshMealIdeas,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: AppTheme.roseGold.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.refresh_rounded, size: 14, color: AppTheme.roseGold),
+                        SizedBox(width: 4),
+                        Text('Refresh', style: TextStyle(fontSize: 12, color: AppTheme.roseGold, fontWeight: FontWeight.w500)),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+
+            if (_loadingMeals && _mealSuggestions.isEmpty)
+              GlassCard(
+                padding: const EdgeInsets.all(20),
+                opacity: 0.08,
+                tint: AppTheme.roseGold,
+                child: const Center(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 8, width: 24, child: CircularProgressIndicator(strokeWidth: 2, color: AppTheme.roseGold)),
+                      SizedBox(height: 12),
+                      Text('Getting personalized suggestions\u2026',
+                          style: TextStyle(fontSize: 13, color: AppTheme.textSecondary)),
+                    ],
+                  ),
+                ),
+              )
+            else if (_mealSuggestions.isNotEmpty)
+              ..._mealSuggestions.entries.map((entry) => _mealIdeaCard(entry.key, entry.value)),
+
+            const SizedBox(height: 24),
+
+            // ── Water tracker ──
             GlassCard(
               padding: const EdgeInsets.all(14),
               opacity: 0.08,
-              radius: 16,
+              tint: AppTheme.cyanTeal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Row(
                     children: [
-                      Text('💧', style: TextStyle(fontSize: 20)),
+                      Text('\u{1F4A7}', style: TextStyle(fontSize: 20)),
                       SizedBox(width: 8),
-                      Text('Water', style: TextStyle(fontSize: 15, color: AppTheme.softSand)),
+                      Text('Water', style: TextStyle(fontSize: 15, color: AppTheme.textPrimary)),
                     ],
                   ),
                   Row(
@@ -125,9 +207,10 @@ class _NourishScreenState extends State<NourishScreen> {
                         icon: const Icon(Icons.remove_circle_outline, color: Colors.white54, size: 20),
                         onPressed: _waterCups > 0 ? () => _updateWater(-1) : null,
                       ),
-                      Text('$_waterCups/8', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppTheme.warmCoral)),
+                      Text('$_waterCups/8',
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppTheme.cyanTeal)),
                       IconButton(
-                        icon: const Icon(Icons.add_circle, color: AppTheme.warmCoral, size: 20),
+                        icon: const Icon(Icons.add_circle, color: AppTheme.cyanTeal, size: 20),
                         onPressed: _waterCups < 8 ? () => _updateWater(1) : null,
                       ),
                     ],
@@ -137,13 +220,13 @@ class _NourishScreenState extends State<NourishScreen> {
             ),
             const SizedBox(height: 20),
 
-            // Log a meal
-            const Text('Log Your Meal', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.softSand)),
+            // ── Log a meal ──
+            const Text('Log Your Meal',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
             const SizedBox(height: 12),
             GlassCard(
               padding: const EdgeInsets.all(16),
               opacity: 0.08,
-              radius: 16,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -172,12 +255,13 @@ class _NourishScreenState extends State<NourishScreen> {
                       hintStyle: TextStyle(color: Color(0x66FFFFFF), fontSize: 14),
                       border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
                     ),
-                    style: const TextStyle(color: AppTheme.softSand, fontSize: 14),
+                    style: const TextStyle(color: AppTheme.textPrimary, fontSize: 14),
                     maxLines: 2,
                   ),
                   const SizedBox(height: 12),
                   // Satisfaction
-                  const Text('How satisfying was that?', style: TextStyle(fontSize: 13, color: AppTheme.softSand)),
+                  const Text('How satisfying was that?',
+                      style: TextStyle(fontSize: 13, color: AppTheme.textPrimary)),
                   const SizedBox(height: 6),
                   Row(
                     children: List.generate(5, (i) {
@@ -187,7 +271,7 @@ class _NourishScreenState extends State<NourishScreen> {
                           padding: const EdgeInsets.only(right: 8),
                           child: Icon(
                             i < _satisfaction ? Icons.star : Icons.star_border,
-                            color: i < _satisfaction ? AppTheme.warmAmber : Colors.white30,
+                            color: i < _satisfaction ? AppTheme.warmGold : Colors.white30,
                             size: 30,
                           ),
                         ),
@@ -202,14 +286,14 @@ class _NourishScreenState extends State<NourishScreen> {
                       hintStyle: TextStyle(color: Color(0x66FFFFFF), fontSize: 13),
                       border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
                     ),
-                    style: const TextStyle(color: AppTheme.softSand, fontSize: 13),
+                    style: const TextStyle(color: AppTheme.textPrimary, fontSize: 13),
                     maxLines: 1,
                   ),
                   const SizedBox(height: 12),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: _saveMeal,
+                      onPressed: () => _saveMeal(),
                       child: const Text('Log Meal'),
                     ),
                   ),
@@ -218,8 +302,9 @@ class _NourishScreenState extends State<NourishScreen> {
             ),
             const SizedBox(height: 24),
 
-            // Recent logs
-            const Text('Recent Meals', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.softSand)),
+            // ── Recent logs ──
+            const Text('Recent Meals',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
             const SizedBox(height: 12),
             if (_logs.isEmpty)
               GlassCard(
@@ -232,7 +317,7 @@ class _NourishScreenState extends State<NourishScreen> {
                       const SizedBox(height: 8),
                       Text('No meals logged yet.\nStart by logging what you ate!',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 14, color: AppTheme.softSand.withValues(alpha: 0.5))),
+                          style: TextStyle(fontSize: 14, color: AppTheme.textSecondary.withValues(alpha: 0.5))),
                     ],
                   ),
                 ),
@@ -249,34 +334,85 @@ class _NourishScreenState extends State<NourishScreen> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: AppTheme.warmCoral.withValues(alpha: 0.15),
+                          color: AppTheme.roseGold.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(log.mealType.toUpperCase(),
-                            style: const TextStyle(fontSize: 10, color: AppTheme.warmCoral, fontWeight: FontWeight.w600)),
+                            style: const TextStyle(fontSize: 10, color: AppTheme.roseGold, fontWeight: FontWeight.w600)),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(log.description,
-                                style: const TextStyle(fontSize: 14, color: AppTheme.softSand)),
+                            Text(log.description, style: const TextStyle(fontSize: 14, color: AppTheme.textPrimary)),
                             Text(log.formattedTime,
-                                style: TextStyle(fontSize: 11, color: AppTheme.softSand.withValues(alpha: 0.5))),
+                                style: TextStyle(fontSize: 11, color: AppTheme.textSecondary.withValues(alpha: 0.5))),
                           ],
                         ),
                       ),
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: List.generate(log.satisfaction, (i) =>
-                          const Icon(Icons.star, color: AppTheme.warmAmber, size: 14)),
+                            const Icon(Icons.star, color: AppTheme.warmGold, size: 14)),
                       ),
                     ],
                   ),
                 ),
               )),
             const SizedBox(height: 24),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _mealIdeaCard(String mealType, String suggestion) {
+    final icons = {
+      'breakfast': '\u{1F95E}',   // croissant
+      'lunch': '\u{1F957}',       // salad
+      'dinner': '\u{1F372}',      // stew
+      'snack': '\u{1F34E}',       // apple
+    };
+    final labels = {
+      'breakfast': 'Breakfast',
+      'lunch': 'Lunch',
+      'dinner': 'Dinner',
+      'snack': 'Snack',
+    };
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: GlassCard(
+        padding: const EdgeInsets.all(12),
+        radius: 14,
+        opacity: 0.06,
+        tint: AppTheme.glassRose,
+        child: Row(
+          children: [
+            Text(icons[mealType] ?? '\u{1F34E}', style: const TextStyle(fontSize: 24)),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(labels[mealType] ?? mealType,
+                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.roseGold)),
+                  const SizedBox(height: 2),
+                  Text(suggestion, style: const TextStyle(fontSize: 14, color: AppTheme.textPrimary)),
+                ],
+              ),
+            ),
+            GestureDetector(
+              onTap: () => _saveMeal(suggestion),
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppTheme.roseGold.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Icon(Icons.add, size: 18, color: AppTheme.roseGold),
+              ),
+            ),
           ],
         ),
       ),
@@ -290,14 +426,14 @@ class _NourishScreenState extends State<NourishScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? AppTheme.warmCoral.withValues(alpha: 0.2) : AppTheme.glassWhite,
+          color: isSelected ? AppTheme.roseGold.withValues(alpha: 0.2) : AppTheme.glassWhite,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: isSelected ? AppTheme.warmCoral : AppTheme.glassBorder),
+          border: Border.all(color: isSelected ? AppTheme.roseGold : AppTheme.glassBorder),
         ),
         child: Text(label,
             style: TextStyle(
               fontSize: 13,
-              color: isSelected ? AppTheme.warmCoral : Colors.white70,
+              color: isSelected ? AppTheme.roseGold : Colors.white70,
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
             )),
       ),
