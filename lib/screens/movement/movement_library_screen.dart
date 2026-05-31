@@ -56,12 +56,12 @@ class _MovementLibraryScreenState extends State<MovementLibraryScreen> with Sing
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.deepNavy,
+      backgroundColor: AppTheme.deepSpace,
       appBar: AppBar(
-        title: const Text('Movement Library', style: TextStyle(color: AppTheme.softSand, fontSize: 20)),
+        title: const Text('Movement Library', style: TextStyle(fontSize: 20, color: AppTheme.textPrimary)),
         bottom: TabBar(
           controller: _tabController,
-          indicatorColor: AppTheme.warmCoral,
+          indicatorColor: AppTheme.vibrantGreen,
           labelColor: AppTheme.warmCoral,
           unselectedLabelColor: Colors.white54,
           tabs: const [
@@ -249,11 +249,11 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.deepNavy,
+      backgroundColor: AppTheme.deepSpace,
       appBar: AppBar(
-        title: Text(widget.video.title, style: const TextStyle(color: AppTheme.softSand)),
+        title: Text(widget.video.title, style: const TextStyle(color: AppTheme.textPrimary)),
         leading: IconButton(
-          icon: const Icon(Icons.close, color: AppTheme.softSand),
+          icon: const Icon(Icons.close, color: AppTheme.textPrimary),
           onPressed: () => Navigator.pop(context),
         ),
       ),

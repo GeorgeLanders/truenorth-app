@@ -27,9 +27,9 @@ class _SOSScreenState extends State<SOSScreen> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.deepNavy,
+      backgroundColor: AppTheme.deepSpace,
       appBar: AppBar(
-        title: const Text('SOS Grounding', style: TextStyle(color: AppTheme.softSand)),
+        title: const Text('SOS Grounding', style: TextStyle(color: AppTheme.textPrimary)),
         backgroundColor: AppTheme.warmCoral.withValues(alpha: 0.1),
       ),
       body: Column(

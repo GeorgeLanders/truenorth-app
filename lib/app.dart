@@ -58,7 +58,6 @@ class _TrueNorthAppState extends State<TrueNorthApp> {
             )
           : _onboardingComplete
               ? const AnimatedBackground(
-                  blur: false,
                   child: AppShell(),
                 )
               : OnboardingScreen(onComplete: _finishOnboarding),

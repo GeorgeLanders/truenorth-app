@@ -59,7 +59,7 @@ class _AppNavShellState extends State<AppNavShell> {
           currentIndex: _currentIndex,
           onTap: (i) => setState(() => _currentIndex = i),
           backgroundColor: Colors.transparent,
-          selectedItemColor: AppTheme.primaryPurple,
+          selectedItemColor: AppTheme.roseGold,
           unselectedItemColor: AppTheme.textMuted,
           selectedFontSize: 11,
           unselectedFontSize: 11,
@@ -75,8 +75,8 @@ class _AppNavShellState extends State<AppNavShell> {
       ),
       floatingActionButton: FloatingActionButton.small(
         onPressed: () => _openMore(context),
-        backgroundColor: AppTheme.primaryPurple,
-        child: const Icon(Icons.menu_rounded, color: Colors.white),
+        backgroundColor: AppTheme.roseGold,
+        child: const Icon(Icons.menu_rounded, color: Color(0xFF1A0A2A)),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
@@ -89,10 +89,10 @@ class _AppNavShellState extends State<AppNavShell> {
       builder: (ctx) => Container(
         padding: const EdgeInsets.only(top: 8),
         decoration: BoxDecoration(
-          color: const Color(0xFF12122A),
+          color: const Color(0xFF1E1235).withValues(alpha: 0.98),
           borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
           border: Border(
-            top: BorderSide(color: Colors.white.withValues(alpha: 0.06)),
+            top: BorderSide(color: AppTheme.roseGold.withValues(alpha: 0.12)),
           ),
         ),
         child: Column(

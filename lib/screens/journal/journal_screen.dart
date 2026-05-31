@@ -65,9 +65,9 @@ class _JournalScreenState extends State<JournalScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.deepNavy,
+      backgroundColor: AppTheme.deepSpace,
       appBar: AppBar(
-        title: const Text('Journal', style: TextStyle(color: AppTheme.softSand)),
+        title: const Text('Journal'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -258,8 +258,8 @@ class _AllEntriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.deepNavy,
-      appBar: AppBar(title: const Text('All Entries', style: TextStyle(color: AppTheme.softSand))),
+      backgroundColor: AppTheme.deepSpace,
+      appBar: AppBar(title: const Text('All Entries')),
       body: ListView.builder(
         padding: const EdgeInsets.all(20),
         itemCount: entries.length,

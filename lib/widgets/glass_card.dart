@@ -13,7 +13,7 @@ class GlassCard extends StatelessWidget {
   final Color? borderColor;
   final Color? glowColor;
   final bool shiny;
-  final Color? tint; // optional warm tint (e.g., AppTheme.roseGold or AppTheme.glassRose)
+  final Color? tint;
 
   const GlassCard({
     super.key,
@@ -21,8 +21,8 @@ class GlassCard extends StatelessWidget {
     this.padding,
     this.height,
     this.width,
-    this.radius = 16,
-    this.opacity = 0.08,
+    this.radius = 18,
+    this.opacity = 0.18,
     this.margin,
     this.borderColor,
     this.glowColor,
@@ -32,9 +32,13 @@ class GlassCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final effectiveOpacity = opacity.clamp(0.0, 1.0);
-    final bgColor = tint?.withValues(alpha: effectiveOpacity) ?? Colors.white.withValues(alpha: effectiveOpacity);
-    final border = borderColor ?? tint?.withValues(alpha: 0.2) ?? Colors.white.withValues(alpha: 0.12);
+    final effectiveOpacity = opacity.clamp(0.05, 0.55);
+    final bgColor = tint != null
+        ? tint!.withValues(alpha: effectiveOpacity)
+        : Colors.white.withValues(alpha: effectiveOpacity);
+    final border = borderColor ?? tint?.withValues(alpha: 0.25) ?? Colors.white.withValues(alpha: 0.18);
+    final glow = (glowColor ?? tint ?? AppTheme.primaryPurple);
+
     return Container(
       width: width,
       height: height,
@@ -43,9 +47,9 @@ class GlassCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(radius),
         boxShadow: [
           BoxShadow(
-            color: (glowColor ?? AppTheme.primaryPurple).withValues(alpha: 0.15),
-            blurRadius: 20,
-            spreadRadius: 0,
+            color: glow.withValues(alpha: 0.12),
+            blurRadius: 24,
+            spreadRadius: 2,
           ),
         ],
       ),
@@ -56,26 +60,23 @@ class GlassCard extends StatelessWidget {
             // Frosted glass base
             Positioned.fill(
               child: BackdropFilter(
-                filter: ui.ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                filter: ui.ImageFilter.blur(sigmaX: 14, sigmaY: 14),
                 child: Container(
                   decoration: BoxDecoration(
                     color: bgColor,
                     borderRadius: BorderRadius.circular(radius),
-                    border: Border.all(
-                      color: border,
-                      width: 1,
-                    ),
+                    border: Border.all(color: border, width: 1),
                   ),
                 ),
               ),
             ),
-            // Shiny gloss reflection overlay at top
+            // Shiny gloss reflection at top
             if (shiny)
               Positioned(
                 top: 0,
                 left: 0,
                 right: 0,
-                height: 40,
+                height: 45,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -86,8 +87,8 @@ class GlassCard extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Colors.white.withValues(alpha: 0.12),
-                        Colors.white.withValues(alpha: 0.0),
+                        Colors.white.withValues(alpha: 0.14),
+                        Colors.transparent,
                       ],
                     ),
                   ),

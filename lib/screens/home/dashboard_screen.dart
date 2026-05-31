@@ -8,7 +8,6 @@ import '../../screens/sos/sos_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
-
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
@@ -45,7 +44,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Greeting
+            // ── Greeting + Streak ──
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -60,46 +59,64 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         color: AppTheme.textPrimary,
                       ),
                     ),
+                    const SizedBox(height: 2),
                     Text(
                       _getTimeGreeting(),
-                      style: const TextStyle(color: AppTheme.textSecondary),
+                      style: const TextStyle(color: AppTheme.roseGold, fontSize: 14, fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
+                // Streak badge — vibrant coral
                 Container(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                   decoration: BoxDecoration(
-                    color: AppTheme.warmCoral.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(12),
+                    gradient: LinearGradient(
+                      colors: [
+                        AppTheme.warmCoral.withValues(alpha: 0.25),
+                        AppTheme.warmCoral.withValues(alpha: 0.08),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: AppTheme.warmCoral.withValues(alpha: 0.3)),
+                    boxShadow: [
+                      BoxShadow(color: AppTheme.warmCoral.withValues(alpha: 0.15), blurRadius: 16),
+                    ],
                   ),
-                  child: Column(
+                  child: Row(
                     children: [
-                      const Icon(Icons.local_fire_department, color: AppTheme.warmCoral, size: 20),
-                      Text('${_user.streak}', style: const TextStyle(color: AppTheme.warmCoral, fontSize: 12, fontWeight: FontWeight.bold)),
-                      const Text('day', style: TextStyle(color: AppTheme.textMuted, fontSize: 10)),
+                      const Icon(Icons.local_fire_department, color: AppTheme.warmCoral, size: 22),
+                      const SizedBox(width: 6),
+                      Column(
+                        children: [
+                          Text('${_user.streak}',
+                              style: const TextStyle(color: AppTheme.warmCoral, fontSize: 16, fontWeight: FontWeight.bold)),
+                          const Text('day', style: TextStyle(color: AppTheme.textMuted, fontSize: 10)),
+                        ],
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 24),
 
-            // Mood Check-in
+            // ── Mood Check-in ──
             GlassCard(
-              padding: const EdgeInsets.all(16),
-              opacity: 0.06,
-              borderColor: AppTheme.primaryPurple.withValues(alpha: 0.15),
+              padding: const EdgeInsets.all(18),
+              tint: AppTheme.glassPurple,
+              opacity: 0.22,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Row(
                     children: [
-                      Icon(Icons.emoji_emotions_outlined, color: AppTheme.warmGold, size: 18),
+                      Icon(Icons.emoji_emotions_outlined, color: AppTheme.warmGold, size: 20),
                       SizedBox(width: 8),
-                      Text('How are you feeling?', style: TextStyle(fontSize: 14, color: AppTheme.textPrimary)),
+                      Text('How are you feeling?',
+                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 14),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -115,53 +132,69 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             const SizedBox(height: 16),
 
-            // Affirmation
+            // ── Daily Affirmation ──
             GlassCard(
-              opacity: 0.1,
-              borderColor: AppTheme.warmGold.withValues(alpha: 0.2),
+              padding: const EdgeInsets.all(16),
+              tint: AppTheme.glassGold,
+              opacity: 0.20,
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [AppTheme.warmGold.withValues(alpha: 0.2), AppTheme.warmGold.withValues(alpha: 0.05)],
+                        colors: [AppTheme.warmGold.withValues(alpha: 0.3), AppTheme.warmGold.withValues(alpha: 0.05)],
                       ),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Icon(Icons.auto_awesome, color: AppTheme.warmGold, size: 20),
+                    child: const Icon(Icons.auto_awesome, color: AppTheme.warmGold, size: 22),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 14),
                   Expanded(
                     child: Text(
                       _getDailyAffirmation(),
-                      style: const TextStyle(color: AppTheme.textSecondary, fontSize: 13, fontStyle: FontStyle.italic),
+                      style: const TextStyle(
+                        color: AppTheme.textPrimary,
+                        fontSize: 14,
+                        fontStyle: FontStyle.italic,
+                        height: 1.4,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 24),
 
-            // Wellness Pillars
-            const Text('Your Wellness', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+            // ── Wellness Pillars ──
+            const Text('Your Wellness',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
             const SizedBox(height: 12),
             Row(
               children: [
-                Expanded(child: _pillarCard('Nourish', Icons.restaurant_rounded, _user.nourishmentCount, 5, AppTheme.vibrantGreen)),
+                Expanded(
+                  child: _pillarCard('Nourish', Icons.restaurant_rounded,
+                      _user.nourishmentCount, 5, AppTheme.roseGold, AppTheme.glassRose),
+                ),
                 const SizedBox(width: 8),
-                Expanded(child: _pillarCard('Rest', Icons.nightlight_round, _user.sleepHours.clamp(0, 8), 8, AppTheme.cyanTeal)),
+                Expanded(
+                  child: _pillarCard('Rest', Icons.nightlight_round,
+                      _user.sleepHours.clamp(0, 8), 8, AppTheme.cyanTeal, AppTheme.glassTeal),
+                ),
                 const SizedBox(width: 8),
-                Expanded(child: _pillarCard('Move', Icons.directions_run_rounded, _user.movementMinutes.clamp(0, 30), 30, AppTheme.warmCoral, suffix: 'min')),
+                Expanded(
+                  child: _pillarCard('Move', Icons.directions_run_rounded,
+                      _user.movementMinutes.clamp(0, 30), 30, AppTheme.vibrantGreen, AppTheme.glassGreen, suffix: 'min'),
+                ),
               ],
             ),
             const SizedBox(height: 16),
 
-            // Water Tracker
+            // ── Water Tracker ──
             GlassCard(
-              padding: const EdgeInsets.all(16),
-              opacity: 0.06,
-              borderColor: AppTheme.cyanTeal.withValues(alpha: 0.15),
+              padding: const EdgeInsets.all(18),
+              tint: AppTheme.glassTeal,
+              opacity: 0.22,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -170,71 +203,73 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     children: [
                       const Row(
                         children: [
-                          Icon(Icons.water_drop, color: AppTheme.cyanTeal, size: 18),
+                          Icon(Icons.water_drop, color: AppTheme.cyanTeal, size: 20),
                           SizedBox(width: 8),
-                          Text('Water Intake', style: TextStyle(fontSize: 15, color: AppTheme.textPrimary)),
+                          Text('Water Intake',
+                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
                         ],
                       ),
                       Text('${_user.waterCups}/8 cups',
-                          style: const TextStyle(color: AppTheme.cyanTeal, fontWeight: FontWeight.w600)),
+                          style: const TextStyle(color: AppTheme.cyanTeal, fontWeight: FontWeight.bold, fontSize: 15)),
                     ],
                   ),
-                  const SizedBox(height: 12),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.remove_circle_outline, color: AppTheme.textMuted),
-                          onPressed: _user.waterCups > 0 ? () => _updateWater(-1) : null,
-                        ),
-                        ...List.generate(8, (i) {
-                          final filled = i < _user.waterCups;
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 3),
-                            child: Container(
-                              width: 24, height: 24,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: filled ? AppTheme.cyanTeal : Colors.white.withValues(alpha: 0.1),
-                                border: filled ? null : Border.all(color: Colors.white.withValues(alpha: 0.2)),
-                                boxShadow: filled ? [BoxShadow(color: AppTheme.cyanTeal.withValues(alpha: 0.4), blurRadius: 8)] : null,
-                              ),
-                              child: filled
-                                  ? const Icon(Icons.check, color: Colors.white, size: 14)
+                  const SizedBox(height: 14),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.remove_circle_outline, color: AppTheme.textMuted),
+                        onPressed: _user.waterCups > 0 ? () => _updateWater(-1) : null,
+                      ),
+                      ...List.generate(8, (i) {
+                        final filled = i < _user.waterCups;
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 3),
+                          child: Container(
+                            width: 26, height: 26,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: filled ? AppTheme.cyanTeal : Colors.white.withValues(alpha: 0.08),
+                              border: filled ? null : Border.all(color: Colors.white.withValues(alpha: 0.15)),
+                              boxShadow: filled
+                                  ? [BoxShadow(color: AppTheme.cyanTeal.withValues(alpha: 0.5), blurRadius: 10)]
                                   : null,
                             ),
-                          );
-                        }),
-                        IconButton(
-                          icon: const Icon(Icons.add_circle, color: AppTheme.cyanTeal),
-                          onPressed: _user.waterCups < 8 ? () => _updateWater(1) : null,
-                        ),
-                      ],
-                    ),
+                            child: filled ? const Icon(Icons.check, color: Colors.white, size: 14) : null,
+                          ),
+                        );
+                      }),
+                      IconButton(
+                        icon: const Icon(Icons.add_circle, color: AppTheme.cyanTeal),
+                        onPressed: _user.waterCups < 8 ? () => _updateWater(1) : null,
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 16),
 
-            // Quick Actions
+            // ── Quick Actions ──
             Row(
               children: [
-                Expanded(child: _quickAction('Journal', Icons.edit_note_rounded, AppTheme.vibrantGreen, () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const JournalScreen()));
-                })),
+                Expanded(
+                  child: _quickAction('Journal', Icons.edit_note_rounded, AppTheme.vibrantGreen, AppTheme.glassGreen, () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const JournalScreen()));
+                  }),
+                ),
                 const SizedBox(width: 8),
-                Expanded(child: _quickAction('SOS', Icons.healing_rounded, AppTheme.warmCoral, () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SOSScreen()));
-                })),
+                Expanded(
+                  child: _quickAction('SOS', Icons.healing_rounded, AppTheme.warmCoral, AppTheme.glassCoral, () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const SOSScreen()));
+                  }),
+                ),
                 const SizedBox(width: 8),
-                Expanded(child: _quickAction('Coach', Icons.smart_toy_rounded, AppTheme.primaryPurple, () {
-                  // Switch to coach tab - but we're in a pushed route,
-                  // so pop back and switch tab
-                  Navigator.popUntil(context, (route) => route.isFirst);
-                })),
+                Expanded(
+                  child: _quickAction('Coach', Icons.psychology_rounded, AppTheme.primaryPurple, AppTheme.glassPurple, () {
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                  }),
+                ),
               ],
             ),
             const SizedBox(height: 24),
@@ -282,43 +317,51 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: isSelected ? AppTheme.primaryPurple.withValues(alpha: 0.2) : Colors.transparent,
-              border: isSelected ? Border.all(color: AppTheme.primaryPurple, width: 2) : null,
+              color: isSelected ? AppTheme.roseGold.withValues(alpha: 0.2) : Colors.transparent,
+              border: isSelected ? Border.all(color: AppTheme.roseGold, width: 2) : null,
+              boxShadow: isSelected
+                  ? [BoxShadow(color: AppTheme.roseGold.withValues(alpha: 0.2), blurRadius: 12)]
+                  : null,
             ),
-            child: Text(emoji, style: const TextStyle(fontSize: 22)),
+            child: Text(emoji, style: const TextStyle(fontSize: 24)),
           ),
           const SizedBox(height: 4),
-          Text(mood, style: TextStyle(fontSize: 10, color: isSelected ? AppTheme.textPrimary : AppTheme.textMuted)),
+          Text(mood,
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                color: isSelected ? AppTheme.roseGold : AppTheme.textMuted,
+              )),
         ],
       ),
     );
   }
 
-  Widget _pillarCard(String label, IconData icon, int value, int max, Color color, {String suffix = ''}) {
+  Widget _pillarCard(String label, IconData icon, int value, int max, Color color, Color tint, {String suffix = ''}) {
     final pct = max > 0 ? (value / max).clamp(0.0, 1.0) : 0.0;
     return GlassCard(
       padding: const EdgeInsets.all(14),
       radius: 16,
-      opacity: 0.06,
-      borderColor: color.withValues(alpha: 0.1),
+      tint: tint,
+      opacity: 0.22,
       child: Column(
         children: [
-          Icon(icon, color: color, size: 28),
+          Icon(icon, color: color, size: 30),
           const SizedBox(height: 8),
           Text('$value$suffix', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
           const SizedBox(height: 4),
-          Text(label, style: TextStyle(fontSize: 12, color: AppTheme.textSecondary)),
-          const SizedBox(height: 6),
+          Text(label, style: const TextStyle(fontSize: 12, color: AppTheme.textSecondary)),
+          const SizedBox(height: 8),
           ClipRRect(
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(4),
             child: LinearProgressIndicator(
               value: pct,
-              backgroundColor: Colors.white.withValues(alpha: 0.1),
+              backgroundColor: Colors.white.withValues(alpha: 0.08),
               valueColor: AlwaysStoppedAnimation<Color>(color),
-              minHeight: 4,
+              minHeight: 5,
             ),
           ),
         ],
@@ -326,19 +369,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _quickAction(String label, IconData icon, Color color, VoidCallback onTap) {
+  Widget _quickAction(String label, IconData icon, Color color, Color tint, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: GlassCard(
-        padding: const EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.symmetric(vertical: 18),
         radius: 16,
-        opacity: 0.06,
-        borderColor: color.withValues(alpha: 0.1),
+        tint: tint,
+        opacity: 0.20,
         child: Column(
           children: [
-            Icon(icon, color: color, size: 28),
-            const SizedBox(height: 6),
-            Text(label, style: TextStyle(fontSize: 13, color: AppTheme.textSecondary)),
+            Icon(icon, color: color, size: 30),
+            const SizedBox(height: 8),
+            Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: color)),
           ],
         ),
       ),
