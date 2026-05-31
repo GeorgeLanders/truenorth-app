@@ -87,6 +87,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
+  static String _goalLabel(String id) {
+    switch (id) {
+      case 'energy': return 'More energy to get through my day';
+      case 'sleep': return 'Better quality sleep and deeper rest';
+      case 'movement': return 'Moving my body in a way that feels good';
+      case 'food': return 'A more mindful relationship with food';
+      case 'confidence': return 'Building body confidence and self-trust';
+      default: return id;
+    }
+  }
+
+  static IconData _goalIcon(String id) {
+    switch (id) {
+      case 'energy': return Icons.bolt;
+      case 'sleep': return Icons.nightlight_round;
+      case 'movement': return Icons.directions_run;
+      case 'food': return Icons.restaurant;
+      case 'confidence': return Icons.favorite_outline;
+      default: return Icons.flag;
+    }
+  }
+
+  Widget _goalChip(String id) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: AppTheme.warmGold.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppTheme.warmGold.withValues(alpha: 0.25)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(_goalIcon(id), size: 14, color: AppTheme.warmGold),
+          const SizedBox(width: 6),
+          Text(_goalLabel(id), style: const TextStyle(fontSize: 12, color: AppTheme.warmGold)),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -157,10 +198,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 20),
 
-            // AI Coach Settings
-            const Text('🤖 AI Coach (DeepSeek V4)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+            // Your Goals
+            const Text('🎯 Your Goals', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
             const SizedBox(height: 4),
-            const Text('Enter your OpenRouter API key to use real AI', style: TextStyle(fontSize: 12, color: AppTheme.textMuted)),
+            Text('${_user.goals.length} goal${_user.goals.length == 1 ? '' : 's'} selected', style: const TextStyle(fontSize: 12, color: AppTheme.textMuted)),
+            const SizedBox(height: 12),
+            GlassCard(
+              opacity: 0.06,
+              borderColor: AppTheme.warmGold.withValues(alpha: 0.15),
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: _user.goals.map((id) => _goalChip(id)).toList(),
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // AI Coach Settings
+            const Text('🤖 AI Coach (NVIDIA Nemotron)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+            const SizedBox(height: 4),
+            const Text('Your AI Coach runs on your Render server. These settings are for the direct fallback.', style: TextStyle(fontSize: 12, color: AppTheme.textMuted)),
             const SizedBox(height: 12),
 
             GlassCard(
@@ -208,7 +265,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text('Default: deepseek/deepseek-v4-flash-free (free). You can change to any OpenRouter model.', style: TextStyle(color: AppTheme.textMuted, fontSize: 11)),
+                  const Text('Default: Uses Render server. Fallback model shown here if you configure a key above.', style: TextStyle(color: AppTheme.textMuted, fontSize: 11)),
                   const SizedBox(height: 16),
 
                   SizedBox(
@@ -219,7 +276,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         _apiKeyCtrl.text.isNotEmpty ? Icons.check_circle_rounded : Icons.link_rounded,
                         size: 16,
                       ),
-                      label: Text(_apiKeyCtrl.text.isNotEmpty ? 'Connect DeepSeek V4' : 'Save Settings'),
+                      label: Text(_apiKeyCtrl.text.isNotEmpty ? 'Save Fallback Settings' : 'Save Settings'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: _apiKeyCtrl.text.isNotEmpty ? AppTheme.vibrantGreen : AppTheme.primaryPurple,
                         padding: const EdgeInsets.symmetric(vertical: 12),

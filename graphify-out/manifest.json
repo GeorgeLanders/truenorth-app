@@ -1,0 +1,702 @@
+{
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\build.gradle.kts": {
+    "mtime": 1780168740.9569473,
+    "ast_hash": "803fe22651fbe96ed401eb0b66a492d1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\gradlew": {
+    "mtime": 1780175848.300723,
+    "ast_hash": "7f1cd7eb3f75a1dc85cd37753972a6e2",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\settings.gradle.kts": {
+    "mtime": 1780168741.0930133,
+    "ast_hash": "f276a44edd917afd836899357fdae60e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\build.gradle.kts": {
+    "mtime": 1780197536.8930118,
+    "ast_hash": "53cc7dd3b19de16412df38f2fa56b29c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\java\\io\\flutter\\plugins\\GeneratedPluginRegistrant.java": {
+    "mtime": 1780169022.9624045,
+    "ast_hash": "a0fb87a0776528d54189ccbe2d34698e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\kotlin\\com\\example\\truenorth_app\\MainActivity.kt": {
+    "mtime": 1780175848.2168248,
+    "ast_hash": "cbef0240b51bff5a0b75c963ecc102e4",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\kotlin\\com\\truenorth\\truenorth_app\\MainActivity.kt": {
+    "mtime": 1780168740.9486003,
+    "ast_hash": "d566f95236575f919787c3f360fa26d5",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Flutter\\flutter_export_environment.sh": {
+    "mtime": 1780185329.3993223,
+    "ast_hash": "352624dff490ae511bebf530038ad6f0",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Flutter\\ephemeral\\flutter_lldb_helper.py": {
+    "mtime": 1780185329.3880467,
+    "ast_hash": "98fc75412162af387e2e3461e4e58094",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\AppDelegate.swift": {
+    "mtime": 1777568251.4659455,
+    "ast_hash": "9e1de9c329a3fe4931876063de95132b",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\GeneratedPluginRegistrant.h": {
+    "mtime": 1780168746.2658484,
+    "ast_hash": "decb9041b5e91a07e66f4664e5dac408",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\GeneratedPluginRegistrant.m": {
+    "mtime": 1780169023.0231907,
+    "ast_hash": "7e18f50fdb9b189eb11c440ccbb9faa9",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Runner-Bridging-Header.h": {
+    "mtime": 1777568251.4659455,
+    "ast_hash": "7ad7b5cea096132de13ba526b2b9efbe",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\SceneDelegate.swift": {
+    "mtime": 1777568251.4659455,
+    "ast_hash": "0c3e86af131f6a9e547c80b5ed058914",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Contents.json": {
+    "mtime": 1777568251.4659455,
+    "ast_hash": "31a08e429403e265cabfb31b3d65f049",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\LaunchImage.imageset\\Contents.json": {
+    "mtime": 1777568251.4659455,
+    "ast_hash": "b9e927ac17345f2d5f052fe68a3487f9",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\RunnerTests\\RunnerTests.swift": {
+    "mtime": 1780168742.00698,
+    "ast_hash": "24e5d095048eb86c30423f4e04b6e57b",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\app.dart": {
+    "mtime": 1780183360.334653,
+    "ast_hash": "ffbe5a113cfc2fde7cc6ad70cf65c3fd",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\main.dart": {
+    "mtime": 1780168989.3981802,
+    "ast_hash": "65629f199716f9e55aecd660e0bd1a10",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\models\\journal_entry.dart": {
+    "mtime": 1780168782.0893526,
+    "ast_hash": "3a245b274f9a9ee9749a70624db67ea3",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\models\\user_data.dart": {
+    "mtime": 1780168782.0893526,
+    "ast_hash": "224199097e4f7aab99fe60d00dee1596",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\screens\\ai_coach\\ai_coach_screen.dart": {
+    "mtime": 1780246005.9535077,
+    "ast_hash": "202ff45dc71a6f9ce5ed3a29089e3bd4",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\screens\\home\\dashboard_screen.dart": {
+    "mtime": 1780183385.955078,
+    "ast_hash": "55b7506f138f0484f2a9bf8e6e7af250",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\screens\\journal\\journal_screen.dart": {
+    "mtime": 1780169151.980289,
+    "ast_hash": "f44e29d9d733a5e4e34d9e7bec3dd4e0",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\screens\\movement\\movement_library_screen.dart": {
+    "mtime": 1780180625.785852,
+    "ast_hash": "ab4779336ef9cac8337578c507fe9abd",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\screens\\nourish\\nourish_screen.dart": {
+    "mtime": 1780168900.7023373,
+    "ast_hash": "84353391adf8957c0c120f13703a9e3c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\screens\\onboarding\\onboarding_screen.dart": {
+    "mtime": 1780169151.980289,
+    "ast_hash": "a41790767c4c23ed0eeeb575a0f4ffc0",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\screens\\profile\\profile_screen.dart": {
+    "mtime": 1780194974.293424,
+    "ast_hash": "51d6d89b92e395b9104fe789fa1c6331",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\screens\\sos\\sos_screen.dart": {
+    "mtime": 1780169114.3544564,
+    "ast_hash": "f5d42eaeb8d3dfd60d39422b58658d56",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\services\\ai_coach_service.dart": {
+    "mtime": 1780245907.8793166,
+    "ast_hash": "f86bf6aca1147165537ba92f3ad56814",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\services\\storage_service.dart": {
+    "mtime": 1780177904.1389437,
+    "ast_hash": "8e1b59ec1aee54bcb6f2c44e072d5334",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\theme\\app_theme.dart": {
+    "mtime": 1780183262.7261355,
+    "ast_hash": "a615e5a812b6da3835ac1fa109fa3409",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\widgets\\animated_background.dart": {
+    "mtime": 1780183301.3512359,
+    "ast_hash": "bd271996dc45ac37a36bacf7a9047cc5",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\widgets\\app_nav_shell.dart": {
+    "mtime": 1780185261.836118,
+    "ast_hash": "6ccf33d09e5ec0f187ea75d3b6eaff2a",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\lib\\widgets\\glass_card.dart": {
+    "mtime": 1780180890.7336192,
+    "ast_hash": "a8e33c1a0bed014284096ef06f70b22a",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\linux\\flutter\\generated_plugin_registrant.cc": {
+    "mtime": 1780169023.010446,
+    "ast_hash": "bd6e64368e100cca8e55173215ae1bdd",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\linux\\flutter\\generated_plugin_registrant.h": {
+    "mtime": 1780168746.176081,
+    "ast_hash": "d295462c9da9f7fef22dc86c34492318",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\linux\\runner\\main.cc": {
+    "mtime": 1777568251.4659455,
+    "ast_hash": "539395bcd63dba20afed0838d136189f",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\linux\\runner\\my_application.cc": {
+    "mtime": 1780168742.2378044,
+    "ast_hash": "39ea9792ee20f2b7b1a4cd732c80e8f6",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\linux\\runner\\my_application.h": {
+    "mtime": 1777568251.4659455,
+    "ast_hash": "ffa1a7c0a2ad45a2c14a921596516ff8",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\macos\\Flutter\\GeneratedPluginRegistrant.swift": {
+    "mtime": 1780169023.0251443,
+    "ast_hash": "09f76a58aaa021eb3bddad27a09aa1de",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\macos\\Flutter\\ephemeral\\flutter_export_environment.sh": {
+    "mtime": 1780185329.403267,
+    "ast_hash": "4f86b8815ce94a11e50bfb760a4405b2",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\macos\\Runner\\AppDelegate.swift": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "4b52e0b89ebfef9baf45b04548c463d6",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\macos\\Runner\\MainFlutterWindow.swift": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "93c22dae2d93f3dc1402e121901f582b",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\macos\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Contents.json": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "1d48e925145d4b573a3b5d7960a1c585",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\macos\\RunnerTests\\RunnerTests.swift": {
+    "mtime": 1780168743.3867962,
+    "ast_hash": "8059f5d27a19c556eeafb49b3f9b7bdd",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\scripts\\generate_feature_graphic.py": {
+    "mtime": 1780245641.4594524,
+    "ast_hash": "5e9ce19558e731633b7a3b8c24b6863d",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\scripts\\generate_screenshots.py": {
+    "mtime": 1780245690.7998652,
+    "ast_hash": "ee7423c67826eb74416e01466f49ae9f",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\server\\main.py": {
+    "mtime": 1780245866.142922,
+    "ast_hash": "5db38dffe392c9361b7f1f3f67569c86",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\test\\widget_test.dart": {
+    "mtime": 1780169114.2343519,
+    "ast_hash": "f6a97e9aafd5878a95785d478f694a20",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\web\\manifest.json": {
+    "mtime": 1780168743.674048,
+    "ast_hash": "f35f3274b1bc9e1eed64a1290a4655dc",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\windows\\flutter\\generated_plugin_registrant.cc": {
+    "mtime": 1780169023.0163124,
+    "ast_hash": "811328ee9b84867ab0b499bd33e5e470",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\windows\\flutter\\generated_plugin_registrant.h": {
+    "mtime": 1780168746.242327,
+    "ast_hash": "0ea33875f9f8e118f9c2ded03e2e2835",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\windows\\runner\\flutter_window.cpp": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "2f463f9b7da67a2d692a012f9ea85e0c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\windows\\runner\\flutter_window.h": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "7defcc89d4a26d56e801241d624d48fb",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\windows\\runner\\main.cpp": {
+    "mtime": 1780168743.7771266,
+    "ast_hash": "a00a83fcf9c3ccb00352c03533671312",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\windows\\runner\\resource.h": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "1ade5dd15e613479a15e8832ed276f2b",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\windows\\runner\\utils.cpp": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "432461b09d862a2f8dadf380ff0e34e5",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\windows\\runner\\utils.h": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "fd81e143f5614eb6fd75efe539002853",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\windows\\runner\\win32_window.cpp": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "571eb8234dbc2661be03aa5f2a4d2fca",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\windows\\runner\\win32_window.h": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "7569387d58711ab975940f4df3b4bcda",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\analysis_options.yaml": {
+    "mtime": 1780168740.922161,
+    "ast_hash": "9e65f4b9beebb674c0dc252f70a5c177",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\INSTRUCTIONS.md": {
+    "mtime": 1780170460.834406,
+    "ast_hash": "a84f37fa31614fdbee8a21bb246a9a47",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\PRIVACY_POLICY.md": {
+    "mtime": 1780197209.7998955,
+    "ast_hash": "dc09f5cfd81325db47200ce179c134f8",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\pubspec.yaml": {
+    "mtime": 1780196381.7927935,
+    "ast_hash": "7b2efd025948cecc248f5a3fdf271160",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\README.md": {
+    "mtime": 1780168743.4186623,
+    "ast_hash": "7bafc4661c19ea8ca355fab7133bee88",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\LaunchImage.imageset\\README.md": {
+    "mtime": 1777568251.4659455,
+    "ast_hash": "f7ee1b402881509d197f34963e569927",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\linux\\CMakeLists.txt": {
+    "mtime": 1780168742.05505,
+    "ast_hash": "bc1d1a682d490b076e8ee635328acf86",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\linux\\flutter\\CMakeLists.txt": {
+    "mtime": 1777568251.4659455,
+    "ast_hash": "2195470ce31675d31db5a37590d011f6",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\linux\\runner\\CMakeLists.txt": {
+    "mtime": 1777568251.4659455,
+    "ast_hash": "30cc1614b16214b66c014af09ba699eb",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\server\\README.md": {
+    "mtime": 1780185487.8492677,
+    "ast_hash": "7658d66e0ced89a0f85b4132601d40e2",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\server\\render.yaml": {
+    "mtime": 1780185497.635156,
+    "ast_hash": "883a2ce3a826c3479032312a88ffe3db",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\server\\requirements.txt": {
+    "mtime": 1780185497.3744576,
+    "ast_hash": "be9de8cb89c56a01233bd6202ecf63ff",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\store_assets\\store_listing.md": {
+    "mtime": 1780245708.6903372,
+    "ast_hash": "b6d052975fae45de479b2fffddf8ae7a",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\web\\index.html": {
+    "mtime": 1780168743.6440625,
+    "ast_hash": "6d2b1d339df075553585319b2161424c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\windows\\CMakeLists.txt": {
+    "mtime": 1780168743.6951687,
+    "ast_hash": "ab0145eb55618ea7210cdbddbd29581d",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\windows\\flutter\\CMakeLists.txt": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "bbf66fed5180bd9ae8198b8d7c4a0001",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\windows\\runner\\CMakeLists.txt": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "028602ab9754bffe716659ada7590d29",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\res\\drawable\\ic_launcher_foreground.png": {
+    "mtime": 1780197111.2660356,
+    "ast_hash": "20fe84bee2889e839dbfd4e05f523169",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\res\\drawable\\splash_icon.png": {
+    "mtime": 1780197111.2650585,
+    "ast_hash": "20fe84bee2889e839dbfd4e05f523169",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png": {
+    "mtime": 1780197047.0269687,
+    "ast_hash": "831ee0cb4ef7e1b0f7d9cd9b1697c5d3",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png": {
+    "mtime": 1780197047.027951,
+    "ast_hash": "831ee0cb4ef7e1b0f7d9cd9b1697c5d3",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png": {
+    "mtime": 1780197047.0181391,
+    "ast_hash": "349d699feb3b93bd5b3038960a7240e9",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png": {
+    "mtime": 1780197047.019116,
+    "ast_hash": "349d699feb3b93bd5b3038960a7240e9",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png": {
+    "mtime": 1780197047.0406992,
+    "ast_hash": "8337351acf0801f9bcdeca4c864da838",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png": {
+    "mtime": 1780197047.0416799,
+    "ast_hash": "8337351acf0801f9bcdeca4c864da838",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png": {
+    "mtime": 1780197047.0790603,
+    "ast_hash": "70355f1d09326c3a615c425d885b0fc1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png": {
+    "mtime": 1780197047.0790603,
+    "ast_hash": "70355f1d09326c3a615c425d885b0fc1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png": {
+    "mtime": 1780197047.1458168,
+    "ast_hash": "d784356d393252b5b6ec2c908bc9670e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png": {
+    "mtime": 1780197047.1468017,
+    "ast_hash": "d784356d393252b5b6ec2c908bc9670e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\assets\\icons\\app_icon.png": {
+    "mtime": 1780196832.7029858,
+    "ast_hash": "c694084055a9113f18dd9a5f25eb35f1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\assets\\icons\\app_icon.svg": {
+    "mtime": 1780196447.2208693,
+    "ast_hash": "cdeaffa466fcb61e6a89dd1779314c70",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\assets\\icons\\app_icon_foreground.png": {
+    "mtime": 1780196876.6489294,
+    "ast_hash": "914a2ea0e8cbf27367d356ce3af93808",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-1024x1024@1x.png": {
+    "mtime": 1779078987.4621546,
+    "ast_hash": "c785f8932297af4acd5f5ccb7630f01c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-20x20@1x.png": {
+    "mtime": 1779078987.4631562,
+    "ast_hash": "a2f8558fb1d42514111fbbb19fb67314",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-20x20@2x.png": {
+    "mtime": 1779078987.4601555,
+    "ast_hash": "2247a840b6ee72b8a069208af170e5b1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-20x20@3x.png": {
+    "mtime": 1779078987.4651563,
+    "ast_hash": "1b3b1538136316263c7092951e923e9d",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-29x29@1x.png": {
+    "mtime": 1779078987.4701552,
+    "ast_hash": "be8887071dd7ec39cb754d236aa9584f",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-29x29@2x.png": {
+    "mtime": 1779078987.457154,
+    "ast_hash": "043119ef4faa026ff82bd03f241e5338",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-29x29@3x.png": {
+    "mtime": 1779078987.464157,
+    "ast_hash": "2b1452c4c1bda6177b4fbbb832df217f",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-40x40@1x.png": {
+    "mtime": 1779078987.458157,
+    "ast_hash": "2247a840b6ee72b8a069208af170e5b1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-40x40@2x.png": {
+    "mtime": 1779078987.468157,
+    "ast_hash": "8245359312aea1b0d2412f79a07b0ca5",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-40x40@3x.png": {
+    "mtime": 1779078987.459155,
+    "ast_hash": "5b3c0902200ce596e9848f22e1f0fe0e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-60x60@2x.png": {
+    "mtime": 1779078987.4611616,
+    "ast_hash": "5b3c0902200ce596e9848f22e1f0fe0e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-60x60@3x.png": {
+    "mtime": 1779078987.4561572,
+    "ast_hash": "e419d22a37bc40ba185aca1acb6d4ac6",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-76x76@1x.png": {
+    "mtime": 1779078987.4601555,
+    "ast_hash": "36c0d7a7132bdde18898ffdfcfcdc4d2",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-76x76@2x.png": {
+    "mtime": 1779078987.4701552,
+    "ast_hash": "643842917530acf4c5159ae851b0baf2",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\AppIcon.appiconset\\Icon-App-83.5x83.5@2x.png": {
+    "mtime": 1779078987.4661567,
+    "ast_hash": "665cb5e3c5729da6d639d26eff47a503",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\LaunchImage.imageset\\LaunchImage.png": {
+    "mtime": 1779078987.455154,
+    "ast_hash": "978c1bee49d7ad5fc1a4d81099b13e18",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\LaunchImage.imageset\\LaunchImage@2x.png": {
+    "mtime": 1779078987.433154,
+    "ast_hash": "978c1bee49d7ad5fc1a4d81099b13e18",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\ios\\Runner\\Assets.xcassets\\LaunchImage.imageset\\LaunchImage@3x.png": {
+    "mtime": 1779078987.432155,
+    "ast_hash": "978c1bee49d7ad5fc1a4d81099b13e18",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\macos\\Runner\\Assets.xcassets\\AppIcon.appiconset\\app_icon_1024.png": {
+    "mtime": 1779078987.4281552,
+    "ast_hash": "c9becc9105f8cabce934d20c7bfb6aac",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\macos\\Runner\\Assets.xcassets\\AppIcon.appiconset\\app_icon_128.png": {
+    "mtime": 1779078987.4231546,
+    "ast_hash": "3ded30823804caaa5ccc944067c54a36",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\macos\\Runner\\Assets.xcassets\\AppIcon.appiconset\\app_icon_16.png": {
+    "mtime": 1779078987.4251554,
+    "ast_hash": "8bf511604bc6ed0a6aeb380c5113fdcf",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\macos\\Runner\\Assets.xcassets\\AppIcon.appiconset\\app_icon_256.png": {
+    "mtime": 1779078987.4281552,
+    "ast_hash": "dfe2c93d1536ae02f085cc63faa3430e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\macos\\Runner\\Assets.xcassets\\AppIcon.appiconset\\app_icon_32.png": {
+    "mtime": 1779078987.4261546,
+    "ast_hash": "8e0ae58e362a6636bdfccbc04da2c58c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\macos\\Runner\\Assets.xcassets\\AppIcon.appiconset\\app_icon_512.png": {
+    "mtime": 1779078987.4241538,
+    "ast_hash": "0ad44039155424738917502c69667699",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\macos\\Runner\\Assets.xcassets\\AppIcon.appiconset\\app_icon_64.png": {
+    "mtime": 1779078987.4231546,
+    "ast_hash": "04e7b6ef05346c70b663ca1d97de3ad5",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\store_assets\\feature_graphic.jpg": {
+    "mtime": 1780245646.1685233,
+    "ast_hash": "6dc333d94be94fc84bd71cee2d633924",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\store_assets\\feature_graphic.png": {
+    "mtime": 1780245645.9348133,
+    "ast_hash": "6f0bbce5c77ed3ad11842d4fb6a07f50",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\store_assets\\screenshot_01_dashboard.png": {
+    "mtime": 1780245694.695037,
+    "ast_hash": "04d5c83a43657e447afe5fb05b23c4eb",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\store_assets\\screenshot_02_ai_coach.png": {
+    "mtime": 1780245694.7132149,
+    "ast_hash": "311f31fd970990653e8043aa09b891ec",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\store_assets\\screenshot_03_movement.png": {
+    "mtime": 1780245694.730841,
+    "ast_hash": "f0475752044d54e5cd62d0773867f7fd",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\store_assets\\screenshot_04_journal.png": {
+    "mtime": 1780245694.7480733,
+    "ast_hash": "47d32a0d01612c183d1a31262212cf5c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\store_assets\\screenshot_05_nourish.png": {
+    "mtime": 1780245694.7691567,
+    "ast_hash": "5263bf8b92754184abb880324870b9f1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\store_assets\\screenshot_06_grounding.png": {
+    "mtime": 1780245694.785351,
+    "ast_hash": "233f3f80e8a2710a47d6a0aab681d3c9",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\web\\favicon.png": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "5dcef449791fa27946b3d35ad8803796",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\web\\icons\\Icon-192.png": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "ac9a721a12bbc803b44f645561ecb1e1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\web\\icons\\Icon-512.png": {
+    "mtime": 1777568251.481538,
+    "ast_hash": "96e752610906ba2a93c65f8abe1645f1",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\web\\icons\\Icon-maskable-192.png": {
+    "mtime": 1779078987.533157,
+    "ast_hash": "c457ef57daa1d16f64b27b786ec2ea3c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\web\\icons\\Icon-maskable-512.png": {
+    "mtime": 1779078987.532158,
+    "ast_hash": "301a7604d45b3e739efc881eb04896ea",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\assets\\videos\\body_scan_relaxation.mp4": {
+    "mtime": 1780169002.0963597,
+    "ast_hash": "94747b762f949de17d206db126cf707d",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\assets\\videos\\box_breathing.mp4": {
+    "mtime": 1780170613.190911,
+    "ast_hash": "23a0f3d36678ad818754faf16585eb08",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\assets\\videos\\cat_cow_stretch.mp4": {
+    "mtime": 1780170612.7990105,
+    "ast_hash": "31a0ff7816eef9e2ecaf65b66fb5b2ab",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\assets\\videos\\mindfull.mp4": {
+    "mtime": 1780170613.3023949,
+    "ast_hash": "757c7787f9725b4334cded1d83083283",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\assets\\videos\\relaxation_breath.mp4": {
+    "mtime": 1780170612.8761828,
+    "ast_hash": "d6d78870c9ac0df71a9b226a52f4d609",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\assets\\videos\\seated_arm_circles.mp4": {
+    "mtime": 1780170613.0991266,
+    "ast_hash": "29d7f0af6801698962ef1680f33eccb4",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\assets\\videos\\seated_forward_fold.mp4": {
+    "mtime": 1780170612.9660535,
+    "ast_hash": "7ebb5fc03464d9788398079be7495a17",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\assets\\videos\\seated_leg_lifts.mp4": {
+    "mtime": 1780169002.1214583,
+    "ast_hash": "227ee75ada6f4ba97fd933bc60498422",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\George\\Desktop\\truenorth_app\\assets\\videos\\seated_torso_twist.mp4": {
+    "mtime": 1780169002.1483893,
+    "ast_hash": "bcc2be468aba7b6d05dc71aca115d4f4",
+    "semantic_hash": ""
+  }
+}

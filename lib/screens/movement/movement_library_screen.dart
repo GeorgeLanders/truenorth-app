@@ -116,12 +116,30 @@ class _MovementLibraryScreenState extends State<MovementLibraryScreen> with Sing
           Navigator.push(context, MaterialPageRoute(
             builder: (_) => VideoPlayerScreen(video: video),
           )).then((_) {
-            // After watching, add movement minutes
+            // After watching, update daily streak and movement minutes
             final user = _storage.loadUserData();
             final minutes = int.tryParse(video.duration.replaceAll(' min', '')) ?? 5;
             user.movementMinutes += minutes;
-            user.streak = (user.streak + 1);
+
+            // Proper daily streak: only count 1 per day
+            final today = DateTime.now().toIso8601String().split('T')[0];
+            if (user.lastActivityDate == null) {
+              user.streak = 1; // first activity ever
+            } else if (user.lastActivityDate == today) {
+              // already active today, don't double-count
+            } else if (user.lastActivityDate ==
+                DateTime.now().subtract(const Duration(days: 1)).toIso8601String().split('T')[0]) {
+              user.streak += 1; // consecutive day
+            } else {
+              user.streak = 1; // gap → reset streak
+            }
+            user.lastActivityDate = today;
             _storage.saveUserData(user);
+            // Also persist to daily_logs table for history/analytics
+            _storage.saveDailyLog(
+              date: today,
+              movementMinutes: user.movementMinutes,
+            );
           });
         } else {
           ScaffoldMessenger.of(context).showSnackBar(

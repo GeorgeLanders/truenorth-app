@@ -30,6 +30,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Future<void> _updateWater(int delta) async {
     _user.waterCups = (_user.waterCups + delta).clamp(0, 8);
     await _storage.saveUserData(_user);
+    await _storage.saveDailyLog(
+      date: DateTime.now().toIso8601String().split('T')[0],
+      waterCups: _user.waterCups,
+    );
     setState(() {});
   }
 
@@ -269,6 +273,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
       onTap: () async {
         _user.moodToday = mood;
         await _storage.saveUserData(_user);
+        await _storage.saveDailyLog(
+          date: DateTime.now().toIso8601String().split('T')[0],
+          mood: mood,
+        );
         setState(() {});
       },
       child: Column(
@@ -300,7 +308,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         children: [
           Icon(icon, color: color, size: 28),
           const SizedBox(height: 8),
-          Text('${value}$suffix', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
+          Text('$value$suffix', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
           const SizedBox(height: 4),
           Text(label, style: TextStyle(fontSize: 12, color: AppTheme.textSecondary)),
           const SizedBox(height: 6),

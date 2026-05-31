@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import '../../theme/app_theme.dart';
 import '../../widgets/glass_card.dart';
 
@@ -68,8 +67,8 @@ class _SOSScreenState extends State<SOSScreen> with SingleTickerProviderStateMix
             child: TabBarView(
               controller: _tabController,
               children: [
-                _buildBreathing(),
-                _buildGrounding(),
+                _buildBreathing(_selectedTrigger),
+                _buildGrounding(_selectedTrigger),
                 _buildResources(),
               ],
             ),
@@ -120,17 +119,24 @@ class _SOSScreenState extends State<SOSScreen> with SingleTickerProviderStateMix
   }
 
   // --- Breathing Exercise ---
-  Widget _buildBreathing() {
+  Widget _buildBreathing(String trigger) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
-        child: BreathingExercise(),
+        child: BreathingExercise(trigger: trigger),
       ),
     );
   }
 
   // --- 5-4-3-2-1 Grounding ---
-  Widget _buildGrounding() {
+  Widget _buildGrounding(String trigger) {
+    final triggerMessages = {
+      'body_image': 'This exercise helps you reconnect with your body as it is, right now — not how you think it should be.',
+      'overwhelm': 'When everything feels like too much, your senses can anchor you. Let\'s find five things together.',
+      'food': 'After eating, sometimes we need to come back to the present. This grounding is about noticing, not judging.',
+      'sleepless': 'If your mind is racing, this can help quiet the noise and bring you back to your body.',
+      'general': 'This technique helps bring you back to the present moment by engaging your senses.',
+    };
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -138,8 +144,10 @@ class _SOSScreenState extends State<SOSScreen> with SingleTickerProviderStateMix
         children: [
           const Text('5-4-3-2-1 Grounding', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppTheme.softSand)),
           const SizedBox(height: 8),
-          Text('This technique helps bring you back to the present moment by engaging your senses.',
-              style: TextStyle(fontSize: 14, color: AppTheme.softSand.withValues(alpha: 0.6))),
+          Text(
+            triggerMessages[trigger] ?? triggerMessages['general']!,
+            style: TextStyle(fontSize: 14, color: AppTheme.softSand.withValues(alpha: 0.6)),
+          ),
           const SizedBox(height: 24),
           _groundingStep('5', 'things you can SEE', Icons.visibility),
           const SizedBox(height: 12),
@@ -253,6 +261,10 @@ class _SOSScreenState extends State<SOSScreen> with SingleTickerProviderStateMix
 
 // --- Breathing Exercise Widget ---
 class BreathingExercise extends StatefulWidget {
+  final String trigger;
+
+  const BreathingExercise({super.key, this.trigger = 'general'});
+
   @override
   State<BreathingExercise> createState() => _BreathingExerciseState();
 }
@@ -262,7 +274,6 @@ class _BreathingExerciseState extends State<BreathingExercise> with SingleTicker
   late Animation<double> _scaleAnim;
   bool _isActive = false;
   String _phase = 'Tap to begin';
-  Timer? _phaseTimer;
   int _phaseIndex = 0;
 
   final List<Map<String, dynamic>> _phases = [
@@ -271,6 +282,21 @@ class _BreathingExerciseState extends State<BreathingExercise> with SingleTicker
     {'text': 'Breathe Out...', 'duration': 6, 'scale': 0.8, 'color': AppTheme.softMint},
     {'text': 'Hold...', 'duration': 2, 'scale': 0.8, 'color': AppTheme.darkTeal},
   ];
+
+  String _getTriggerMessage() {
+    switch (widget.trigger) {
+      case 'body_image':
+        return 'Your body is not a problem to be solved.\nYou are worthy, exactly as you are.';
+      case 'overwhelm':
+        return 'You\'re safe right now.\nLet\'s take this one breath at a time.';
+      case 'food':
+        return 'No guilt, no judgment.\nJust notice how you feel right now.';
+      case 'sleepless':
+        return 'Rest is not a reward — it\'s a right.\nLet your mind slow down.';
+      default:
+        return 'You are here, and that is enough.\nBreathe with me.';
+    }
+  }
 
   @override
   void initState() {
@@ -283,7 +309,6 @@ class _BreathingExerciseState extends State<BreathingExercise> with SingleTicker
 
   void _startBreathing() {
     if (_isActive) {
-      _phaseTimer?.cancel();
       _animController.stop();
       setState(() {
         _isActive = false;
@@ -316,7 +341,6 @@ class _BreathingExerciseState extends State<BreathingExercise> with SingleTicker
   @override
   void dispose() {
     _animController.dispose();
-    _phaseTimer?.cancel();
     super.dispose();
   }
 
@@ -327,6 +351,13 @@ class _BreathingExerciseState extends State<BreathingExercise> with SingleTicker
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // Personalized trigger message
+          Text(
+            _getTriggerMessage(),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 14, color: AppTheme.softSand.withValues(alpha: 0.7), height: 1.4),
+          ),
+          const SizedBox(height: 24),
           AnimatedBuilder(
             animation: _scaleAnim,
             builder: (_, child) {

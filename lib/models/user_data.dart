@@ -4,6 +4,7 @@ class UserData {
   List<String> goals;
   String mobilityPreference; // 'seated', 'low_impact', 'mix'
   int streak;
+  String? lastActivityDate; // ISO date of last activity (for streak tracking)
   int waterCups;
   int sleepHours;
   int movementMinutes;
@@ -21,6 +22,7 @@ class UserData {
     this.goals = const [],
     this.mobilityPreference = 'mix',
     this.streak = 0,
+    this.lastActivityDate,
     this.waterCups = 0,
     this.sleepHours = 0,
     this.movementMinutes = 0,
@@ -39,6 +41,7 @@ class UserData {
     'goals': goals,
     'mobilityPreference': mobilityPreference,
     'streak': streak,
+    'lastActivityDate': lastActivityDate,
     'waterCups': waterCups,
     'sleepHours': sleepHours,
     'movementMinutes': movementMinutes,
@@ -57,6 +60,7 @@ class UserData {
     goals: (json['goals'] as List?)?.cast<String>() ?? [],
     mobilityPreference: json['mobilityPreference'] as String? ?? 'mix',
     streak: json['streak'] as int? ?? 0,
+    lastActivityDate: json['lastActivityDate'] as String?,
     waterCups: json['waterCups'] as int? ?? 0,
     sleepHours: json['sleepHours'] as int? ?? 0,
     movementMinutes: json['movementMinutes'] as int? ?? 0,
@@ -75,6 +79,7 @@ class UserData {
     List<String>? goals,
     String? mobilityPreference,
     int? streak,
+    String? lastActivityDate,
     int? waterCups,
     int? sleepHours,
     int? movementMinutes,
@@ -92,6 +97,7 @@ class UserData {
       goals: goals ?? this.goals,
       mobilityPreference: mobilityPreference ?? this.mobilityPreference,
       streak: streak ?? this.streak,
+      lastActivityDate: lastActivityDate ?? this.lastActivityDate,
       waterCups: waterCups ?? this.waterCups,
       sleepHours: sleepHours ?? this.sleepHours,
       movementMinutes: movementMinutes ?? this.movementMinutes,

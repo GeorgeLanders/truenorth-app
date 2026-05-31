@@ -47,6 +47,10 @@ class _NourishScreenState extends State<NourishScreen> {
     final user = _storage.loadUserData();
     user.nourishmentCount++;
     await _storage.saveUserData(user);
+    await _storage.saveDailyLog(
+      date: DateTime.now().toIso8601String().split('T')[0],
+      nourishmentCount: user.nourishmentCount,
+    );
     _descController.clear();
     _notesController.clear();
     setState(() => _satisfaction = 3);
@@ -61,11 +65,15 @@ class _NourishScreenState extends State<NourishScreen> {
     }
   }
 
-  void _updateWater(int delta) {
+  Future<void> _updateWater(int delta) async {
     setState(() => _waterCups = (_waterCups + delta).clamp(0, 8));
     final user = _storage.loadUserData();
     user.waterCups = _waterCups;
-    _storage.saveUserData(user);
+    await _storage.saveUserData(user);
+    await _storage.saveDailyLog(
+      date: DateTime.now().toIso8601String().split('T')[0],
+      waterCups: user.waterCups,
+    );
   }
 
   @override
