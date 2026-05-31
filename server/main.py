@@ -6,7 +6,6 @@ from pydantic import BaseModel
 
 app = FastAPI(title="TrueNorth AI Coach API")
 
-# Allow your Flutter app to call this server
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -14,8 +13,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
-OPENROUTER_MODEL = os.environ.get("OPENROUTER_MODEL", "deepseek/deepseek-v4-flash-free")
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "").strip()
+OPENROUTER_MODEL = os.environ.get("OPENROUTER_MODEL", "deepseek/deepseek-v4-flash-free").strip()
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 SYSTEM_PROMPT = """You are TrueNorth Coach, a warm, empathetic wellness coach for an app called TrueNorth. Your users are people on a weight loss and wellness journey — primarily plus-size men and women who want shame-free support.
@@ -46,21 +45,22 @@ class ChatResponse(BaseModel):
 
 @app.get("/")
 async def root():
-    return {"status": "ok", "service": "TrueNorth AI Coach"}
+    return {"status": "ok", "service": "TrueNorth AI Coach", "model": OPENROUTER_MODEL}
 
 
 @app.get("/health")
 async def health():
-    return {"status": "healthy"}
+    return {"status": "healthy", "key_configured": bool(OPENROUTER_API_KEY)}
 
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(req: ChatRequest):
     if not OPENROUTER_API_KEY:
         raise HTTPException(status_code=500, detail="OpenRouter API key not configured on server")
-    
+
+    # Inject user name into system prompt
     system = SYSTEM_PROMPT.replace("the user", req.user_name)
-    
+
     async with httpx.AsyncClient(timeout=30) as client:
         try:
             resp = await client.post(
@@ -82,7 +82,14 @@ async def chat(req: ChatRequest):
                 },
             )
             data = resp.json()
-            reply = data["choices"][0]["message"]["content"]
+            # Safely extract the reply
+            choices = data.get("choices", [])
+            if not choices:
+                error_msg = data.get("error", {}).get("message", str(data))
+                raise HTTPException(status_code=502, detail=f"OpenRouter returned no choices: {error_msg}")
+            reply = choices[0]["message"]["content"]
             return ChatResponse(reply=reply, model=OPENROUTER_MODEL)
+        except HTTPException:
+            raise
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
