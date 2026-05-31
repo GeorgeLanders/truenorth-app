@@ -15,7 +15,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = "17"
     }
 
     defaultConfig {
@@ -27,7 +27,7 @@ android {
     }
 
     signingConfigs {
-        release {
+        create("release") {
             storeFile = file("../../truenorth-release-key.jks")
             storePassword = "Truenorth2026!"
             keyAlias = "truenorth"
@@ -36,7 +36,7 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             signingConfig = signingConfigs.getByName("release")
         }
     }
